@@ -1,147 +1,85 @@
-import type { ScrollState, UseAutoScrollOptions } from '$lib/types.js';
+import type { UseAutoScrollOptions } from '$lib/types.js';
 
-export class UseAutoScroll {
-	#ref = $state<HTMLElement | null>(null);
-	#lastContentHeight = $state(0);
-	#userHasScrolled = $state(false);
+export function useAutoScroll(options: UseAutoScrollOptions = {}) {
+	const { offset = 20, smooth = false, content } = options;
+	let scrollRef = $state<HTMLDivElement>();
+	let lastContentHeight = $state(0);
+	let userHasScrolled = $state(false);
 
-	scrollState = $state<ScrollState>({
+	let scrollState = $state({
 		isAtBottom: true,
 		autoScrollEnabled: true
 	});
-
-	#offset: number;
-	#smooth: boolean;
-	#content: any;
-	#resizeObserver: ResizeObserver | null = null;
-
-	constructor(options: UseAutoScrollOptions = {}) {
-		this.#offset = options.offset ?? 20;
-		this.#smooth = options.smooth ?? false;
-		this.#content = options.content;
-
-		this.#setupResizeObserver();
-		$effect(() => {
-			this.#handleContentChange();
-		});
-	}
-
-	#checkIsAtBottom(element: HTMLElement): boolean {
+	function checkIsAtBottom(element: HTMLElement) {
 		const { scrollTop, scrollHeight, clientHeight } = element;
 		const distanceToBottom = Math.abs(scrollHeight - scrollTop - clientHeight);
-		return distanceToBottom <= this.#offset;
+		return distanceToBottom <= offset;
 	}
-
-	scrollToBottom(instant = false) {
-		if (!this.#ref) return;
-
-		const targetScrollTop = this.#ref.scrollHeight - this.#ref.clientHeight;
+	function scrollToBottom(instant?: boolean) {
+		if (!scrollRef) return;
+		const targetScrollTop = scrollRef.scrollHeight - scrollRef.clientHeight;
 
 		if (instant) {
-			this.#ref.scrollTop = targetScrollTop;
+			scrollRef.scrollTop = targetScrollTop;
 		} else {
-			this.#ref.scrollTo({
+			scrollRef.scrollTo({
 				top: targetScrollTop,
-				behavior: this.#smooth ? 'smooth' : 'auto'
+				behavior: smooth ? 'smooth' : 'auto'
 			});
 		}
-
-		this.scrollState = {
-			isAtBottom: true,
-			autoScrollEnabled: true
-		};
-		this.#userHasScrolled = false;
+		scrollState.isAtBottom = true;
+		scrollState.autoScrollEnabled = true;
 	}
-
-	#handleScroll = () => {
-		if (!this.#ref) return;
-
-		const atBottom = this.#checkIsAtBottom(this.#ref);
-
-		this.scrollState = {
-			isAtBottom: atBottom,
-			// Re-enable auto-scroll if at the bottom
-			autoScrollEnabled: atBottom ? true : this.scrollState.autoScrollEnabled
-		};
-	};
-
-	setRef(element: HTMLElement | null) {
-		if (this.#ref) {
-			// Clean up old listeners
-			this.#ref.removeEventListener('scroll', this.#handleScroll);
-			this.#resizeObserver?.disconnect();
-		}
-
-		this.#ref = element;
-
-		if (element) {
-			// Set up new listeners
-			element.addEventListener('scroll', this.#handleScroll, { passive: true });
-			this.#setupResizeObserver();
-		}
+	function handleScroll() {
+		if (!scrollRef) return;
+		const atBottom = checkIsAtBottom(scrollRef);
+		scrollState.isAtBottom = atBottom;
+		scrollState.autoScrollEnabled = atBottom ? true : scrollState.autoScrollEnabled;
 	}
+	$effect(() => {
+		if (!scrollRef) return;
 
-	#setupResizeObserver() {
-		this.#resizeObserver?.disconnect();
-
-		if (this.#ref) {
-			this.#resizeObserver = new ResizeObserver(() => {
-				if (this.scrollState.autoScrollEnabled) {
-					this.scrollToBottom(true);
-				}
-			});
-
-			this.#resizeObserver.observe(this.#ref);
-		}
-	}
-
-	#handleContentChange() {
-		const scrollElement = this.#ref;
-		if (!scrollElement) return;
-
-		const currentHeight = scrollElement.scrollHeight;
-		const hasNewContent = currentHeight !== this.#lastContentHeight;
+		const currentHeight = scrollRef.scrollHeight;
+		const hasNewContent = currentHeight !== lastContentHeight;
 
 		if (hasNewContent) {
-			if (this.scrollState.autoScrollEnabled) {
+			if (scrollState.autoScrollEnabled) {
 				requestAnimationFrame(() => {
-					this.scrollToBottom(this.#lastContentHeight === 0);
+					scrollToBottom(lastContentHeight === 0);
 				});
 			}
-			this.#lastContentHeight = currentHeight;
+			lastContentHeight = currentHeight;
 		}
-	}
+	});
+	$effect(() => {
+		if (!scrollRef) return;
+		const resizeObserver = new ResizeObserver(() => {
+			if (scrollState.autoScrollEnabled) {
+				scrollToBottom(true);
+			}
+		});
 
-	disableAutoScroll() {
-		const atBottom = this.#ref ? this.#checkIsAtBottom(this.#ref) : false;
-
-		// Only disable if not at bottom
-		if (!atBottom) {
-			this.#userHasScrolled = true;
-			this.scrollState = {
-				...this.scrollState,
-				autoScrollEnabled: false
-			};
+		resizeObserver.observe(scrollRef);
+		return () => resizeObserver.disconnect();
+	});
+	return {
+		scrollState,
+		get scrollRef() {
+			return scrollRef;
+		},
+		get userHasScrolled() {
+			return userHasScrolled;
+		},
+		isAtBottom: scrollState.isAtBottom,
+		autoScrollEnabled: scrollState.autoScrollEnabled,
+		scrollToBottom: () => scrollToBottom(false),
+		disableAutoScroll() {
+			const atBottom = scrollRef ? checkIsAtBottom(scrollRef) : false;
+			// Only disable if not at bottom
+			if (!atBottom) {
+				userHasScrolled = true;
+				scrollState.autoScrollEnabled = false;
+			}
 		}
-	}
-
-	// Clean up method to remove listeners
-	destroy() {
-		if (this.#ref) {
-			this.#ref.removeEventListener('scroll', this.#handleScroll);
-		}
-		this.#resizeObserver?.disconnect();
-	}
-
-	get ref() {
-		return this.#ref;
-	}
-
-	get isAtBottom() {
-		return this.scrollState.isAtBottom;
-	}
-
-	get autoScrollEnabled() {
-		return this.scrollState.autoScrollEnabled;
-	}
+	};
 }
