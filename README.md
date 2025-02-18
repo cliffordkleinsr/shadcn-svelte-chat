@@ -1,58 +1,32 @@
-# create-svelte
+# Turborepo Svelte starter
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This Turborepo starter is maintained by the Turborepo core team.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Using this example
 
-## Creating a project
+Run the following command:
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```sh
+npx create-turbo@latest -e with-svelte
 ```
 
-## Developing
+## What's inside?
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+This Turborepo includes the following packages/apps:
 
-```bash
-npm run dev
+### Apps and Packages
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- `docs`: a [svelte-kit](https://kit.svelte.dev/) app
+- `web`: another [svelte-kit](https://kit.svelte.dev/) app
+- `ui`: a stub Svelte component library shared by both `web` and `docs` applications
+- `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-## Building
+### Utilities
 
-To build your library:
+This Turborepo has some additional tools already setup for you:
 
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
