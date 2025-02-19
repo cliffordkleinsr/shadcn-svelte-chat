@@ -3,8 +3,12 @@ import prompts from 'prompts';
 import path from 'path';
 import ora from 'ora';
 import chalk from 'chalk';
-import { copyItems } from '../utils/utils.js';
+import { checkDirectoryExists, copyItems } from '../utils/utils.js';
 import { promises as fs } from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const init = new Command()
 	.name('init')
@@ -16,8 +20,7 @@ export const init = new Command()
 			const confirmResponse = await prompts({
 				type: 'confirm',
 				name: 'init',
-				message:
-					"This will install chat components and hooks from 'template' to the '$lib' directory. Proceed?",
+				message: "This will install chat components and hooks to the '$lib' directory. Proceed?",
 				initial: false
 			});
 
@@ -29,7 +32,6 @@ export const init = new Command()
 			const sourceComponentsDir = path.join(__dirname, '..', 'template', 'chat');
 			const sourceHooksDir = path.join(__dirname, '..', 'template', 'hooks');
 
-			// Define target directories
 			const targetComponentsDir = path.join(
 				process.cwd(),
 				'src',
@@ -40,23 +42,40 @@ export const init = new Command()
 			);
 			const targetHooksDir = path.join(process.cwd(), 'src', 'lib', 'hooks');
 
-			spinner.start('Cloning components...');
-			const copiedComponents = await copyItems(sourceComponentsDir, targetComponentsDir); // Pass targetComponentsDir
-			spinner.succeed(
-				`Components ${copiedComponents.length > 0 ? copiedComponents.join(', ') : 'not'} found and cloned.`
-			);
+			// Check if directories already exist before copying components and hooks
+			// --- Corrected Logic for Checking and Copying ---
+			const componentsExist = await checkDirectoryExists(targetComponentsDir);
+			const hooksExist = await checkDirectoryExists(targetHooksDir);
 
-			spinner.start('Cloning hooks...');
-			const copiedHooks = await copyItems(sourceHooksDir, targetHooksDir); // Pass targetHooksDir
+			spinner.start('Copying components...');
+			const copiedComponents = componentsExist
+				? []
+				: await copyItems(sourceComponentsDir, targetComponentsDir); // Pass 'components' type
+			spinner.succeed(
+				`Components ${copiedComponents.length > 0 ? copiedComponents.join(', ') : componentsExist ? 'already exist' : 'not'} found and copied.`
+			); // Correct message
+
+			spinner.start('Copying hooks...');
+			const copiedHooks = await copyItems(sourceHooksDir, targetHooksDir); // Pass 'hooks' type
 			spinner.succeed(
 				`Hooks ${copiedHooks.length > 0 ? copiedHooks.join(', ') : 'not'} found and cloned.`
-			);
+			); // Correct message
 
 			const templateDir = path.join(__dirname, '..', 'template');
 			const targetLibDir = path.join(process.cwd(), 'src', 'lib');
-			const filesToCopy = ['index.ts', 'types.d.ts'];
+			const filesToCopy = ['index.js', 'types.d.ts'];
 
-			spinner.start('Cloning entry points...');
+			// Check for existing index.ts and remove it if it exists
+			const existingIndexPath = path.join(targetLibDir, 'index.ts');
+			try {
+				await fs.access(existingIndexPath); // Check if index.ts exists
+				await fs.unlink(existingIndexPath); // Remove index.ts
+				console.log(chalk.yellow('Removed existing index.ts'));
+			} catch (err) {
+				// index.ts doesn't exist, so do nothing
+			}
+
+			spinner.start('Copying entry points...');
 			for (const file of filesToCopy) {
 				const sourcePath = path.join(templateDir, file);
 				const targetPath = path.join(targetLibDir, file);
@@ -69,7 +88,8 @@ export const init = new Command()
 				}
 			}
 			spinner.succeed(`${filesToCopy.length} Entrypoints found and cloned.`);
-			if (copiedComponents.length === 0 && copiedHooks.length === 0) {
+
+			if (copiedComponents.length === 0 && copiedHooks.length === 0 && filesToCopy.length === 0) {
 				console.log(chalk.yellow("No components or hooks found in the 'template' directories."));
 				return;
 			}

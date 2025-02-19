@@ -1,10 +1,18 @@
 import path from 'path';
-import { promises as fs } from 'fs'; // Import the promises-based API
+import { promises as fs, type PathLike } from 'fs'; // Import the promises-based API
 async function delay(ms: number | undefined) {
 	// Helper function for delay
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export async function checkDirectoryExists(dirPath: PathLike) {
+	try {
+		await fs.access(dirPath);
+		return true; // Directory exists
+	} catch (error) {
+		return false; // Directory doesn't exist
+	}
+}
 async function writeComponentFiles(files: any[], baseDir: string) {
 	try {
 		await fs.mkdir(baseDir, { recursive: true });
