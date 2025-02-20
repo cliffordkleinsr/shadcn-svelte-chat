@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DivableProps } from '$lib/types.js';
+	import type { DivableProps } from '../../../types.js';
 	let { class: className, ...restProps }: DivableProps = $props();
 </script>
 

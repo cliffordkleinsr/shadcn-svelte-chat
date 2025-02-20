@@ -3,4 +3,4 @@
 	let { class: className, ...restProps }: DivableProps = $props();
 </script>
 
-<div class={['flex-grow overflow-y-auto', className]} {...restProps}></div>
+<div class={['grow overflow-y-auto', className]} {...restProps}></div>

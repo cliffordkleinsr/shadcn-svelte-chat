@@ -13,7 +13,7 @@
 	{ref}
 	name="message"
 	class={[
-		'flex h-16 max-h-12 w-full resize-none items-center rounded-md bg-background px-4 py-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+		'bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-16 max-h-12 w-full resize-none items-center rounded-md px-4 py-3 text-sm focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
 		className
 	]}
 	{...restProps}

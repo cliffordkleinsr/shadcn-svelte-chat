@@ -32,7 +32,7 @@
 	<div
 		bind:this={chatRef}
 		class={[
-			'duration-250 fixed inset-0 flex h-full w-full flex-col overflow-hidden border bg-background shadow-md transition-all ease-out sm:absolute sm:inset-auto sm:h-[80vh] sm:w-[90vw] sm:rounded-lg',
+			'bg-background fixed inset-0 flex h-full w-full flex-col overflow-hidden border shadow-md transition-all duration-250 ease-out sm:absolute sm:inset-auto sm:h-[80vh] sm:w-[90vw] sm:rounded-lg',
 			chatConfig.chatPositions[position],
 			chatConfig.dimensions[size],
 			isOpen ? chatConfig.states.open : chatConfig.states.closed,
@@ -43,7 +43,7 @@
 		<Button
 			variant="ghost"
 			size="icon"
-			class="absolute right-2 top-2 sm:hidden"
+			class="absolute top-2 right-2 sm:hidden"
 			onclick={toggleChat}
 		>
 			<X class="size-4" />

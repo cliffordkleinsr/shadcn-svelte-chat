@@ -1,43 +1,42 @@
-<script>
+<script lang="ts">
+	type Props = {
+		size?: number;
+	};
+
+	let { size = 4 }: Props = $props();
 </script>
 
-<svg
-	width="24"
-	height="24"
-	viewBox="0 0 24 24"
-	xmlns="http://www.w3.org/2000/svg"
-	class="text-foreground"
->
-	<circle cx="4" cy="12" r="2" fill="currentColor">
-		<animate
-			id="spinner_qFRN"
-			begin="0;spinner_OcgL.end+0.25s"
-			attributeName="cy"
-			calcMode="spline"
-			dur="0.6s"
-			values="12;6;12"
-			keySplines=".33,.66,.66,1;.33,0,.66,.33"
-		/>
-	</circle>
-	<circle cx="12" cy="12" r="2" fill="currentColor">
-		<animate
-			begin="spinner_qFRN.begin+0.1s"
-			attributeName="cy"
-			calcMode="spline"
-			dur="0.6s"
-			values="12;6;12"
-			keySplines=".33,.66,.66,1;.33,0,.66,.33"
-		/>
-	</circle>
-	<circle cx="20" cy="12" r="2" fill="currentColor">
-		<animate
-			id="spinner_OcgL"
-			begin="spinner_qFRN.begin+0.2s"
-			attributeName="cy"
-			calcMode="spline"
-			dur="0.6s"
-			values="12;6;12"
-			keySplines=".33,.66,.66,1;.33,0,.66,.33"
-		/>
-	</circle>
-</svg>
+<div style:--loading-dots-size="{size}px" class="inline-flex items-center gap-1">
+	{#each { length: 3 } as _}
+		<span class="inline-block size-[var(--loading-dots-size)] rounded-full bg-primary"></span>
+	{/each}
+</div>
+
+<style>
+	span {
+		animation-name: loading-dots;
+		animation-duration: 1.4s;
+		animation-iteration-count: infinite;
+		animation-fill-mode: both;
+	}
+
+	span:nth-of-type(2) {
+		animation-delay: 0.2s;
+	}
+
+	span:nth-of-type(3) {
+		animation-delay: 0.4s;
+	}
+
+	@keyframes loading-dots {
+		0% {
+			opacity: 0.2;
+		}
+		20% {
+			opacity: 1;
+		}
+		to {
+			opacity: 0.2;
+		}
+	}
+</style>

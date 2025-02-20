@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { DivableProps } from '$lib/types.js';
+	import type { DivableProps } from '../../../types.js';
 	import { Button } from '../button/index.js';
 	import ArrowDown from 'lucide-svelte/icons/a-arrow-down';
-	import { useAutoScroll } from '../../../hooks/use_autoscroll.svelte.js';
+	import { useAutoScroll } from './hooks/use_autoscroll.svelte.js';
 	type ChatMessageListProps = DivableProps & {
 		smooth?: boolean;
 	};

@@ -30,7 +30,7 @@ export const init = new Command()
 			}
 
 			const sourceComponentsDir = path.join(__dirname, '..', 'template', 'chat');
-			const sourceHooksDir = path.join(__dirname, '..', 'template', 'hooks');
+			// const sourceHooksDir = path.join(__dirname, '..', 'template', 'hooks');
 
 			const targetComponentsDir = path.join(
 				process.cwd(),
@@ -40,12 +40,12 @@ export const init = new Command()
 				'ui',
 				'chat'
 			);
-			const targetHooksDir = path.join(process.cwd(), 'src', 'lib', 'hooks');
+			// const targetHooksDir = path.join(process.cwd(), 'src', 'lib', 'hooks');
 
 			// Check if directories already exist before copying components and hooks
 			// --- Corrected Logic for Checking and Copying ---
 			const componentsExist = await checkDirectoryExists(targetComponentsDir);
-			const hooksExist = await checkDirectoryExists(targetHooksDir);
+			// const hooksExist = await checkDirectoryExists(targetHooksDir);
 
 			spinner.start('Copying components...');
 			const copiedComponents = componentsExist
@@ -55,11 +55,11 @@ export const init = new Command()
 				`Components ${copiedComponents.length > 0 ? copiedComponents.join(', ') : componentsExist ? 'already exist' : 'not'} found and copied.`
 			); // Correct message
 
-			spinner.start('Copying hooks...');
-			const copiedHooks = await copyItems(sourceHooksDir, targetHooksDir); // Pass 'hooks' type
-			spinner.succeed(
-				`Hooks ${copiedHooks.length > 0 ? copiedHooks.join(', ') : 'not'} found and cloned.`
-			); // Correct message
+			// spinner.start('Copying hooks...');
+			// const copiedHooks = await copyItems(sourceHooksDir, targetHooksDir); // Pass 'hooks' type
+			// spinner.succeed(
+			// 	`Hooks ${copiedHooks.length > 0 ? copiedHooks.join(', ') : 'not'} found and cloned.`
+			// ); // Correct message
 
 			const templateDir = path.join(__dirname, '..', 'template');
 			const targetLibDir = path.join(process.cwd(), 'src', 'lib');
@@ -89,7 +89,7 @@ export const init = new Command()
 			}
 			spinner.succeed(`${filesToCopy.length} Entrypoints found and cloned.`);
 
-			if (copiedComponents.length === 0 && copiedHooks.length === 0 && filesToCopy.length === 0) {
+			if (copiedComponents.length === 0 && filesToCopy.length === 0) {
 				console.log(chalk.yellow("No components or hooks found in the 'template' directories."));
 				return;
 			}
