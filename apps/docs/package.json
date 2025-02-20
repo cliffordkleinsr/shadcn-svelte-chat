@@ -46,6 +46,7 @@
 	"type": "module",
 	"dependencies": {
 		"mode-watcher": "^0.5.1",
+		"shiki-magic-move": "^1.0.1",
 		"tw-elements": "^2.0.0"
 	}
 }
