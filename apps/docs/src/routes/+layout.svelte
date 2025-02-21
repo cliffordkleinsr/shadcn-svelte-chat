@@ -35,6 +35,13 @@
 			open = !open;
 		}
 	}
+
+	$effect(() => {
+		(async function () {
+			let { ScrollSpy, initTWE } = await import('tw-elements');
+			initTWE({ ScrollSpy });
+		})();
+	});
 </script>
 
 <ModeWatcher />

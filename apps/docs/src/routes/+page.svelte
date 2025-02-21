@@ -2,13 +2,6 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { ChevronRight } from 'lucide-svelte';
 	//   import { ScrollSpy, initTWE } from "tw-elements";
-
-	$effect(() => {
-		(async function () {
-			let { ScrollSpy, initTWE } = await import('tw-elements');
-			initTWE({ ScrollSpy });
-		})();
-	});
 </script>
 
 <div class="grid gap-1 lg:grid-cols-4">
