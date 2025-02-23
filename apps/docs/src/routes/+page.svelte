@@ -4,12 +4,12 @@
 	//   import { ScrollSpy, initTWE } from "tw-elements";
 </script>
 
-<div class="grid gap-1 lg:grid-cols-4">
+<div class="grid gap-1 px-5 py-3 lg:grid-cols-4 lg:px-25 lg:py-15">
 	<div
 		data-twe-spy="scroll"
 		data-twe-target="#scrollspy-smooth"
 		data-twe-offset="0"
-		class="relative col-span-3 overflow-auto px-10 py-5"
+		class="relative col-span-3 grid gap-5 overflow-auto"
 	>
 		<section id="introduction" class="flex flex-col gap-3">
 			<h1 class="text-3xl font-bold">Introduction</h1>
@@ -23,26 +23,27 @@
 				<p>
 					This project is inspired by <a
 						class=" underline underline-offset-2"
-						href="https://docs-shadcn-chat.vercel.app/">Shadcn Chat</a
+						href="https://docs-shadcn-chat.vercel.app/">shadcn chat</a
 					>
 				</p>
 			</div>
 		</section>
 		<section id="features" class="flex max-w-3xl flex-col gap-3">
-			<h3 class="pt-5 pb-3 text-xl font-semibold">Key Features</h3>
+			<h3 class="pt-5 pb-3 text-2xl font-bold">Key Features</h3>
 			<ul class="list-outside list-disc space-y-2">
 				<li>
-					<span>Integration with Shadcn-svelte:</span> Shadcn Chat for svelte works seamlessly with Shadcn
-					svelte, which contains a list of reusable UI components.
+					<span class="text-accent-foreground font-semibold">Integration with shadcn-svelte:</span> Shadcn
+					chat for svelte works seamlessly with Shadcn svelte, which contains a list of reusable UI components.
 				</li>
 				<li>
-					<span>Customizable and Reusable Components: </span>Shadcn Chat provides pre-built chat
-					components that you can easily customize to match your application's design and
-					functionality.
+					<span class="text-accent-foreground font-semibold"
+						>Customizable and Reusable Components:</span
+					> Shadcn chat provides pre-built chat components that you can easily customize to match your
+					application's design and functionality.
 				</li>
 				<li>
-					<span>Open Source:</span> The library is bundled with an MIT license making it free for anyone
-					to use
+					<span class="text-accent-foreground font-semibold">Open Source:</span> The library is bundled
+					with an MIT license making it free for anyone to use
 				</li>
 			</ul>
 		</section>

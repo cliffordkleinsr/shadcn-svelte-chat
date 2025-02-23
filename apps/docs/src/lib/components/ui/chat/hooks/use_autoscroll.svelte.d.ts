@@ -1,13 +1,11 @@
-import type { UseAutoScrollOptions } from '../../../types.js';
-export declare function useAutoScroll(options?: UseAutoScrollOptions): {
-	scrollState: {
-		isAtBottom: boolean;
-		autoScrollEnabled: boolean;
-	};
-	readonly scrollRef: HTMLDivElement | undefined;
-	readonly userHasScrolled: boolean;
-	isAtBottom: boolean;
-	autoScrollEnabled: boolean;
-	scrollToBottom: () => void;
-	disableAutoScroll(): void;
+type AutoscrollOptions = {
+	pauseOnUserScroll?: boolean;
 };
+export default function autoscroll(
+	node: HTMLElement,
+	options?: AutoscrollOptions & ScrollOptions
+): {
+	update({ pauseOnUserScroll, behavior }: AutoscrollOptions & ScrollOptions): void;
+	destroy(): void;
+};
+export {};

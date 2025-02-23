@@ -1,6 +1,8 @@
 <script lang="ts">
-	import type { DivableProps } from '../../../types.js';
-	let { class: className, ...restProps }: DivableProps = $props();
+	import type { DivableProps } from '../../../../types.js';
+	let { class: className, children, ...restProps }: DivableProps = $props();
 </script>
 
-<div class={['grow overflow-y-auto', className]} {...restProps}></div>
+<div class={['grow overflow-y-auto', className]} {...restProps}>
+	{@render children?.()}
+</div>

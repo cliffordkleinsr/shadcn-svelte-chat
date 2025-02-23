@@ -1,77 +1,76 @@
-export function useAutoScroll(options = {}) {
-	const { offset = 20, smooth = false, content } = options;
-	let scrollRef = $state();
-	let lastContentHeight = $state(0);
-	let userHasScrolled = $state(false);
-	let scrollState = $state({
-		isAtBottom: true,
-		autoScrollEnabled: true
-	});
-	function checkIsAtBottom(element) {
-		const { scrollTop, scrollHeight, clientHeight } = element;
-		const distanceToBottom = Math.abs(scrollHeight - scrollTop - clientHeight);
-		return distanceToBottom <= offset;
+export default function autoscroll(
+	node,
+	options = {
+		behavior: 'smooth'
 	}
-	function scrollToBottom(instant) {
-		if (!scrollRef) return;
-		const targetScrollTop = scrollRef.scrollHeight - scrollRef.clientHeight;
-		if (instant) {
-			scrollRef.scrollTop = targetScrollTop;
-		} else {
-			scrollRef.scrollTo({
-				top: targetScrollTop,
-				behavior: smooth ? 'smooth' : 'auto'
-			});
-		}
-		scrollState.isAtBottom = true;
-		scrollState.autoScrollEnabled = true;
+) {
+	const forbiddenOverflows = ['visible', 'hidden'];
+	if (
+		forbiddenOverflows.includes(getComputedStyle(node).overflowX) &&
+		forbiddenOverflows.includes(getComputedStyle(node).overflowY)
+	) {
+		console.warn(
+			'Autoscroll element will never scroll. Set at least one of `overflow-x` or `overflow-y` to either `auto` or `scroll`.'
+		);
 	}
-	function handleScroll() {
-		if (!scrollRef) return;
-		const atBottom = checkIsAtBottom(scrollRef);
-		scrollState.isAtBottom = atBottom;
-		scrollState.autoScrollEnabled = atBottom ? true : scrollState.autoScrollEnabled;
-	}
-	$effect(() => {
-		if (!scrollRef) return;
-		const currentHeight = scrollRef.scrollHeight;
-		const hasNewContent = currentHeight !== lastContentHeight;
-		if (hasNewContent) {
-			if (scrollState.autoScrollEnabled) {
-				requestAnimationFrame(() => {
-					scrollToBottom(lastContentHeight === 0);
-				});
-			}
-			lastContentHeight = currentHeight;
-		}
-	});
-	$effect(() => {
-		if (!scrollRef) return;
-		const resizeObserver = new ResizeObserver(() => {
-			if (scrollState.autoScrollEnabled) {
-				scrollToBottom(true);
-			}
+	const { pauseOnUserScroll: _, ...scrollOptions } = {
+		behavior: 'smooth',
+		...options
+	};
+	const scroll = () => {
+		node.scrollTo({
+			top: node.scrollHeight,
+			left: node.scrollWidth,
+			...scrollOptions
 		});
-		resizeObserver.observe(scrollRef);
-		return () => resizeObserver.disconnect();
+	};
+	// for when children change sizes
+	const resizeObserver = new ResizeObserver(() => {
+		scroll();
 	});
+	// for when children are added or removed/subtree changes
+	const mutationObserver = new MutationObserver(() => {
+		scroll();
+	});
+	const observeAll = () => {
+		// observe size of all children
+		for (const child of node.children) {
+			resizeObserver.observe(child);
+		}
+		mutationObserver.observe(node, { childList: true, subtree: true });
+	};
+	observeAll();
+	const handleScroll = () => {
+		if (node.scrollTop + node.clientHeight < node.scrollHeight) {
+			mutationObserver.disconnect();
+			resizeObserver.disconnect();
+		} else {
+			observeAll();
+		}
+	};
+	if (options.pauseOnUserScroll) {
+		node.addEventListener('scroll', handleScroll);
+	}
 	return {
-		scrollState,
-		get scrollRef() {
-			return scrollRef;
+		update({ pauseOnUserScroll, behavior }) {
+			if (pauseOnUserScroll) {
+				node.addEventListener('scroll', handleScroll);
+				mutationObserver.disconnect();
+				resizeObserver.disconnect();
+			} else {
+				node.removeEventListener('scroll', handleScroll);
+				observeAll();
+			}
 		},
-		get userHasScrolled() {
-			return userHasScrolled;
-		},
-		isAtBottom: scrollState.isAtBottom,
-		autoScrollEnabled: scrollState.autoScrollEnabled,
-		scrollToBottom: () => scrollToBottom(false),
-		disableAutoScroll() {
-			const atBottom = scrollRef ? checkIsAtBottom(scrollRef) : false;
-			// Only disable if not at bottom
-			if (!atBottom) {
-				userHasScrolled = true;
-				scrollState.autoScrollEnabled = false;
+		destroy() {
+			if (mutationObserver) {
+				mutationObserver.disconnect();
+			}
+			if (resizeObserver) {
+				resizeObserver.disconnect();
+			}
+			if (options.pauseOnUserScroll) {
+				node.removeEventListener('scroll', handleScroll);
 			}
 		}
 	};

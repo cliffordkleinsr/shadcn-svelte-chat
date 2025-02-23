@@ -37,7 +37,7 @@
 
 <Button
 	variant="outline"
-	class={cn('text-muted-foreground relative justify-start text-sm sm:pr-12')}
+	class={['text-muted-foreground relative justify-start text-sm sm:pr-12']}
 	onclick={() => (open = true)}
 >
 	<span class="hidden lg:inline-flex"> Search documentation... </span>
@@ -49,7 +49,7 @@
 	</kbd>
 </Button>
 <Command.Dialog bind:open>
-	<Command.Input placeholder="Type a command or search" />
+	<Command.Input placeholder="Type a command or search" class="w-full" />
 	<Command.List>
 		<Command.Empty>No results found.</Command.Empty>
 		<Command.Group heading="Links">

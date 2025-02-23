@@ -6,6 +6,7 @@
 	import * as Command from '$lib/components/ui/command';
 	import Github from 'lucide-svelte/icons/github';
 	import { ModeWatcher } from 'mode-watcher';
+	import { Toaster } from 'svelte-sonner';
 	let { children } = $props();
 
 	const menuitems = {
@@ -22,8 +23,25 @@
 			},
 			{
 				title: 'Component Anatomy',
-				url: '/anatomy',
-				items: []
+				url: '',
+				items: [
+					{
+						title: 'Chat Bubble',
+						url: '/reference/chat-bubble'
+					},
+					{
+						title: 'Chat Input',
+						url: '/reference/chat-input'
+					},
+					{
+						title: 'Chat Message List',
+						url: '/reference/chat-message-list'
+					},
+					{
+						title: 'Expandable chat',
+						url: '/reference/expandable-chat'
+					}
+				]
 			}
 		]
 	};
@@ -35,16 +53,10 @@
 			open = !open;
 		}
 	}
-
-	$effect(() => {
-		(async function () {
-			let { ScrollSpy, initTWE } = await import('tw-elements');
-			initTWE({ ScrollSpy });
-		})();
-	});
 </script>
 
 <ModeWatcher />
+<Toaster richColors />
 <svelte:document onkeydown={handleKeydown} />
 <Sidebar.Provider>
 	<AppSidebar {...menuitems} />

@@ -11,8 +11,9 @@
 	import { Button } from './button';
 	import SearchForm from './search-form.svelte';
 	import { page } from '$app/state';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
 	// forms
-
+	const sidebar = useSidebar();
 	interface Barside {
 		title: string;
 		url: string;
@@ -59,7 +60,15 @@
 							<Sidebar.MenuButton isActive={page.url.pathname === group.url}>
 								{#snippet child({ props })}
 									<Collapsible.Trigger {...props}>
-										<a href={group.url} {...props}>
+										<a
+											href={group.url}
+											{...props}
+											onclick={() => {
+												if (sidebar.isMobile && group.title !== 'Component Anatomy') {
+													setTimeout(() => sidebar.toggle(), 300);
+												}
+											}}
+										>
 											<span>{group.title}</span>
 										</a>
 									</Collapsible.Trigger>
@@ -67,10 +76,17 @@
 										<Sidebar.MenuSub>
 											{#each group.items as item (item.title)}
 												<Sidebar.MenuSubItem>
-													<Sidebar.MenuButton>
+													<Sidebar.MenuButton isActive={page.url.pathname === item.url}>
 														{#snippet child({ props })}
-															<a href={item.url} {...props}>
-																<item.icon />
+															<a
+																href={item.url}
+																{...props}
+																onclick={() => {
+																	if (sidebar.isMobile) {
+																		setTimeout(() => sidebar.toggle(), 300);
+																	}
+																}}
+															>
 																{item.title}
 															</a>
 														{/snippet}

@@ -6,6 +6,8 @@
 	import Npm from '$lib/svgs/npm.svelte';
 	import Bun from '$lib/svgs/bun.svelte';
 	import Pnpm from '$lib/svgs/pnpm.svelte';
+	import { mode } from 'mode-watcher';
+	import { CopyButton } from '$lib/components/tzezars-enhancements/copy-button';
 
 	let {
 		class: className = '',
@@ -15,10 +17,13 @@
 		bun_c = 'bun x shadcn-svelte@next add button textarea avatar'
 	} = $props();
 	const highlighter = createHighlighter({
-		themes: ['poimandres', 'aurora-x', 'min-dark'],
+		themes: ['poimandres', 'aurora-x', 'min-dark', 'github-light', 'github-dark'],
 		langs: ['javascript', 'typescript', 'python', 'svelte', 'powershell', 'angular-ts']
 	});
 
+	$effect(() => {
+		return async () => (await highlighter).dispose;
+	});
 	// let code = $state();
 
 	function npm() {
@@ -54,12 +59,15 @@
 	</Button>
 </div>
 {#await highlighter then highlighter}
-	<ShikiMagicMove
-		class={className}
-		lang="powershell"
-		theme="aurora-x"
-		{highlighter}
-		{code}
-		options={{ duration: 800, stagger: 0.3, lineNumbers: true }}
-	/>
+	<div class="relative">
+		<ShikiMagicMove
+			class={className}
+			lang="powershell"
+			theme={$mode === 'light' ? 'github-light' : 'github-dark'}
+			{highlighter}
+			{code}
+			options={{ duration: 800, stagger: 0.3, lineNumbers: true }}
+		/>
+		<CopyButton textToCopy={code} class="absolute inset-8 top-0 -left-2 lg:left-120" />
+	</div>
 {/await}
