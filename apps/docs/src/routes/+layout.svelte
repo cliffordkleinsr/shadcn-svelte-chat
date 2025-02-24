@@ -42,7 +42,7 @@
 						url: '/reference/expandable-chat'
 					}
 				]
-			}, 
+			},
 			{
 				title: 'Examples',
 				url: '',
@@ -50,7 +50,7 @@
 					{
 						title: 'Messenger',
 						url: '/examples/messenger'
-					},
+					}
 				]
 			}
 		]
@@ -78,7 +78,11 @@
 			<Separator orientation="vertical" class="mr-2 h-4" />
 
 			<div class="ml-auto flex gap-2">
-				<a href="##" aria-label="github">
+				<a
+					href="https://github.com/cliffordkleinsr/shadcn-svelte-chat.git"
+					aria-label="github"
+					target="_blank"
+				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 						<path
 							fill="currentColor"

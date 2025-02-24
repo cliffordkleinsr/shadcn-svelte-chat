@@ -52,12 +52,18 @@ export function setchatBotMessages(fn: (chatBotMessages: Message[]) => Message[]
 	}));
 }
 
-export function setMessages(messages: Message[]) {
+export function setMessages(fn: (messages: Message[]) => Message[]) {
 	chatStore.update((state) => ({
 		...state,
-		messages: state.messages
+		messages: fn(state.messages)
 	}));
 }
+// export function setMessages(messages: Message[]) {
+// 	chatStore.update((state) => ({
+// 		...state,
+// 		messages: messages
+// 	}));
+// }
 
 export function setHasInitialAIResponse(hasInitialAIResponse: boolean) {
 	chatStore.update((state) => ({ ...state, hasInitialAIResponse }));

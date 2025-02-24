@@ -8,7 +8,7 @@
 		onchange: (value: string) => void;
 	}
 
-	let { onchange }: EmojiPickerProps = $props()
+	let { onchange }: EmojiPickerProps = $props();
 
 	let emojiPickerVisible = $state(false);
 	let pickerContainer = $state() as HTMLElement;
@@ -21,7 +21,7 @@
 			emojiPicker.addEventListener('emoji-click', (event: Event) => {
 				// console.log(event.detail.emoji.unicode)
 				const customEvent = event as CustomEvent;
-				onchange(customEvent.detail.unicode)
+				onchange(customEvent.detail.unicode);
 				selectedEmoji.push(customEvent.detail.unicode);
 				// editor?.commands.insertContent(customEvent.detail.unicode)
 			});
@@ -53,6 +53,6 @@
 		{/snippet}
 	</Popover.Trigger>
 	<Popover.Content class="w-full">
-		<div class="" bind:this={pickerContainer} ></div>
+		<div class="" bind:this={pickerContainer}></div>
 	</Popover.Content>
 </Popover.Root>

@@ -60,7 +60,7 @@
       "name": "@shadcn-svelte-chat/cli",
       "version": "1.2.0",
       "bin": {
-        "shadcn-chat-cli": "dist/index.js",
+        "shadcn-chat-cli": "dist/index.js"
       },
       "dependencies": {
         "@types/fs-extra": "^11.0.4",

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Message, UserData } from '../data/data';
-	// import { animateExit, mercury } from '@omicrxn/mercury';	
-	import { AnimatePresence, motion } from "motion-start";
+	// import { animateExit, mercury } from '@omicrxn/mercury';
+	import { AnimatePresence, motion } from 'motion-start';
 	import { EllipsisVertical, Forward, Heart } from 'lucide-svelte';
 	import {
 		ChatBubbleAvatar,
@@ -13,6 +13,7 @@
 		ChatMessageList,
 		autoscroll
 	} from '../../index.js';
+	import { toast } from 'svelte-sonner';
 	interface ChatListProps {
 		messages: Message[];
 		selectedUser: UserData;
@@ -41,35 +42,40 @@
 				animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
 				exit={{ opacity: 0, scale: 1, y: 1, x: 0 }}
 				transition={{
-				opacity: { duration: 0.1 },
-				layout: {
-					type: "spring",
-					bounce: 0.3,
-					duration: index * 0.05 + 0.2,
-				},
+					opacity: { duration: 0.1 },
+					layout: {
+						type: 'spring',
+						bounce: 0.3,
+						duration: index * 0.05 + 0.2
+					}
 				}}
 				style={{ originX: 0.5, originY: 0.5 }}
 				class="flex flex-col gap-2 p-4"
 			>
-			<ChatBubble {variant}>
-				<ChatBubbleAvatar src={message.avatar} />
-				<ChatBubbleMessage isLoading={message.isLoading}>
-					{message.message}
-					{#if message.timestamp}
-						<ChatBubbleTimestamp timestamp={message.timestamp} />
-					{/if}
-				</ChatBubbleMessage>
-				<ChatBubbleActionWrapper>
-					{#each actionIcons as { icon, type }}
-						{@const Icon = icon}
-						<ChatBubbleAction class="size-7">
-							{#snippet icon()}
-								<Icon />
-							{/snippet}
-						</ChatBubbleAction>
-					{/each}
-				</ChatBubbleActionWrapper>
-			</ChatBubble>
+				<ChatBubble {variant}>
+					<ChatBubbleAvatar src={message.avatar} />
+					<ChatBubbleMessage isLoading={message.isLoading}>
+						{message.message}
+						{#if message.timestamp}
+							<ChatBubbleTimestamp timestamp={message.timestamp} />
+						{/if}
+					</ChatBubbleMessage>
+					<ChatBubbleActionWrapper>
+						{#each actionIcons as { icon, type }}
+							{@const Icon = icon}
+							<ChatBubbleAction
+								class="size-7"
+								onclick={() => {
+									toast.message('Action ' + type + ' clicked for message ' + index);
+								}}
+							>
+								{#snippet icon()}
+									<Icon />
+								{/snippet}
+							</ChatBubbleAction>
+						{/each}
+					</ChatBubbleActionWrapper>
+				</ChatBubble>
 			</motion.div>
 		{/each}
 		<!-- </AnimatePresence> -->
