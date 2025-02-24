@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Message, UserData } from '../data/data';
-	import { animateExit, mercury } from '@omicrxn/mercury';
+	// import { animateExit, mercury } from '@omicrxn/mercury';	
+	import { AnimatePresence, motion } from "motion-start";
 	import { EllipsisVertical, Forward, Heart } from 'lucide-svelte';
 	import {
 		ChatBubbleAvatar,
@@ -30,21 +31,26 @@
 </script>
 
 <div class="flex h-full w-full flex-col overflow-y-hidden">
-	<ChatMessageList>
+	<ChatMessageList class="max-h-[400px]">
+		<!-- <AnimatePresence> -->
 		{#each messages as message, index}
 			{@const variant = getMessageVariant(message.name, selectedUser.name)}
-			<!-- <div
-				use:mercury={{
-					initial: { opacity: 0, scale: 1, y: 50, x: 0 },
-					animate: { opacity: 0, scale: 1, y: 50, x: 0 }
+			<motion.div
+				layout
+				initial={{ opacity: 0, scale: 1, y: 50, x: 0 }}
+				animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+				exit={{ opacity: 0, scale: 1, y: 1, x: 0 }}
+				transition={{
+				opacity: { duration: 0.1 },
+				layout: {
+					type: "spring",
+					bounce: 0.3,
+					duration: index * 0.05 + 0.2,
+				},
 				}}
-				layout="${index}"
-				out:animateExit={{
-					animate: { opacity: 1, scale: 1, y: 0, x: 0 },
-					transition: { duration: 0.1, ease: 'spring' }
-				}}
-				class="flex origin-center transform flex-col gap-2 p-4"
-			> -->
+				style={{ originX: 0.5, originY: 0.5 }}
+				class="flex flex-col gap-2 p-4"
+			>
 			<ChatBubble {variant}>
 				<ChatBubbleAvatar src={message.avatar} />
 				<ChatBubbleMessage isLoading={message.isLoading}>
@@ -64,7 +70,8 @@
 					{/each}
 				</ChatBubbleActionWrapper>
 			</ChatBubble>
-			<!-- </div> -->
+			</motion.div>
 		{/each}
+		<!-- </AnimatePresence> -->
 	</ChatMessageList>
 </div>

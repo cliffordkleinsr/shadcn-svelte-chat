@@ -10,7 +10,7 @@
 		selectedUser: UserData;
 		isMobile: boolean;
 	}
-
+	
 	let { messages, selectedUser, isMobile }: ChatProps = $props();
 
 	function sendMessage(newMessage: Message) {

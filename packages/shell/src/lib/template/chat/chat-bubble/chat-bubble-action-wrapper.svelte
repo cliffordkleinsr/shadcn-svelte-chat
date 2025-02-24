@@ -17,7 +17,9 @@
 <div
 	class={[
 		'absolute top-1/2 flex -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100',
-		variant === 'sent' ? '-left-1 -translate-x-full flex-row-reverse' : '-right-1 translate-x-full',
+		variant === 'sent' 
+			? '-top-1 -translate-y-full flex-row-reverse' 
+			: '-bottom-1 translate-y-full',
 		className
 	]}
 	{...restProps}

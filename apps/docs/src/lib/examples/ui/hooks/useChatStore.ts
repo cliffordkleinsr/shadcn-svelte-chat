@@ -41,7 +41,7 @@ export function setInput(input: string) {
 }
 
 export function handleInputChange(e: Event) {
-	const target = e.target as HTMLInputElement;
+	const target = e.target as HTMLTextAreaElement;
 	chatStore.update((state) => ({ ...state, input: target.value }));
 }
 
@@ -52,10 +52,10 @@ export function setchatBotMessages(fn: (chatBotMessages: Message[]) => Message[]
 	}));
 }
 
-export function setMessages(fn: (messages: Message[]) => Message[]) {
+export function setMessages(messages: Message[]) {
 	chatStore.update((state) => ({
 		...state,
-		messages: fn(state.messages)
+		messages: state.messages
 	}));
 }
 

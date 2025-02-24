@@ -47,11 +47,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@omicrxn/mercury": "^0.1.33",
 		"emoji-picker-element": "^1.26.1",
 		"isomorphic-dompurify": "^2.22.0",
 		"mode-watcher": "^0.5.1",
-		"shiki-magic-move": "^1.0.1",
-		"tw-elements": "^2.0.0"
+		"shiki-magic-move": "^1.0.1"
 	}
 }

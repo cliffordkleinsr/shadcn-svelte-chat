@@ -42,6 +42,16 @@
 						url: '/reference/expandable-chat'
 					}
 				]
+			}, 
+			{
+				title: 'Examples',
+				url: '',
+				items: [
+					{
+						title: 'Messenger',
+						url: '/examples/messenger'
+					},
+				]
 			}
 		]
 	};
