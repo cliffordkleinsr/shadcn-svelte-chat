@@ -8,7 +8,7 @@
 
 <div style:--loading-dots-size="{size}px" class="inline-flex items-center gap-1">
 	{#each { length: 3 } as _}
-		<span class="inline-block size-[var(--loading-dots-size)] rounded-full bg-primary"></span>
+		<span class="bg-green-400 inline-block size-[var(--loading-dots-size)] rounded-full"></span>
 	{/each}
 </div>
 

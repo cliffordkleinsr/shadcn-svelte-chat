@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ChatBubble, ChatBubbleAvatar, ChatBubbleMessage, ChatMessageList } from '$lib';
+	import Meta from '$lib/blocks/seo/meta.svelte';
 	import TabList from '$lib/blocks/TabList.svelte';
 	import CodeBlock from '$lib/components/tzezars-enhancements/code-block/code-block.svelte';
 	import { base_snippet } from '$lib/configs/code-blocks';
@@ -19,7 +20,14 @@
 		},
 		{ variant: 'sent', avatar: 'US', message: null, isLoading: true }
 	];
+	const Pageprops = {
+		title: 'Chat Message List • Reference',
+		description: 'Chat Message List API refrence',
+		type: 'Website'
+	};
 </script>
+
+<Meta {...Pageprops} />
 
 <div class="grid gap-2 px-5 py-3 lg:grid-cols-4 lg:px-20 lg:py-15">
 	<div class="col-span-3 grid gap-5">
@@ -39,7 +47,7 @@
 						{#each chatMessages as message}
 							<ChatBubble variant={message.variant}>
 								<ChatBubbleAvatar fallback={message.avatar || 'AI'} />
-								<ChatBubbleMessage variant={message.variant} isLoading={message.isLoading || false}>
+								<ChatBubbleMessage variant={message.variant} isLoading={message.isLoading}>
 									{message.message}
 								</ChatBubbleMessage>
 							</ChatBubble>

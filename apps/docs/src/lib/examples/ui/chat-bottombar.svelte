@@ -69,6 +69,7 @@
 	const handleKeyPress = (event: KeyboardEvent) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
+			message = (event.target as HTMLTextAreaElement).value;
 			handleSend();
 		}
 
@@ -113,6 +114,19 @@
 				setHasInitialResponse(false);
 			}, 2500);
 		}
+
+		return () => {
+			setMessages((messages) => [
+				...messages.slice(0, messages.length - 1),
+				{
+					id: 9,
+					avatar:
+						'https://images.freeimages.com/images/large-previews/971/basic-shape-avatar-1632968.jpg?fmt=webp&h=350',
+					name: 'Jane Doe',
+					isLoading: true
+				}
+			]);
+		};
 	});
 </script>
 

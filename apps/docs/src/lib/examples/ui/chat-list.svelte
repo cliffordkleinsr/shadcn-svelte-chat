@@ -25,8 +25,8 @@
 
 	const actionIcons = [
 		{ icon: EllipsisVertical, type: 'More' },
-		{ icon: Forward, type: 'Like' },
-		{ icon: Heart, type: 'Share' }
+		{ icon: Forward, type: 'Share' },
+		{ icon: Heart, type: 'Like' }
 	];
 	let { messages, selectedUser, sendMessage, isMobile }: ChatListProps = $props();
 </script>

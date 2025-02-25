@@ -15,6 +15,7 @@
 	import { base_snippet, without_actions, with_actions } from '$lib/configs/code-blocks';
 	import { toast } from 'svelte-sonner';
 	import { Separator } from '$lib/components/ui/separator';
+	import Meta from '$lib/blocks/seo/meta.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -70,7 +71,14 @@
 		{ icon: Copy, type: 'Copy' },
 		{ icon: RefreshCcw, type: 'Regenerate' }
 	];
+	const Pageprops = {
+		title: 'Chat Bubble • Reference',
+		description: 'Chat Bubble API reference',
+		type: 'Website'
+	};
 </script>
+
+<Meta {...Pageprops} />
 
 <div class="grid gap-2 px-5 py-3 lg:grid-cols-4 lg:px-20 lg:py-15">
 	<div class="col-span-3 grid gap-5">

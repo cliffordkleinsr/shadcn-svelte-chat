@@ -18,8 +18,8 @@
 	class={[
 		'absolute top-1/2 flex -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100',
 		variant === 'sent' 
-			? '-top-1 -translate-y-full flex-row-reverse' 
-			: '-bottom-1 translate-y-full',
+			? '-top-0 -translate-y-full flex-row-reverse' 
+			: '-bottom-0 translate-y-full',
 		className
 	]}
 	{...restProps}

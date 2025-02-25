@@ -1,12 +1,20 @@
 <script lang="ts">
 	import { ChatInput } from '$lib';
+	import Meta from '$lib/blocks/seo/meta.svelte';
 	import TabList from '$lib/blocks/TabList.svelte';
 	import CodeBlock from '$lib/components/tzezars-enhancements/code-block/code-block.svelte';
 	import { base_input_snippet } from '$lib/configs/code-blocks';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+	const Pageprops = {
+		title: 'Chat Input • Reference',
+		description: 'Chat Input API refrence',
+		type: 'Website'
+	};
 </script>
+
+<Meta {...Pageprops} />
 
 <div class="grid gap-2 px-5 py-3 lg:grid-cols-4 lg:px-20 lg:py-15">
 	<div class="col-span-3 grid gap-5">

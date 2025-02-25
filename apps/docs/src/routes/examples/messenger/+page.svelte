@@ -8,6 +8,7 @@
 	import Sidebar from '$lib/examples/ui/Sidebar.svelte';
 	import Chat from '$lib/examples/ui/chat.svelte';
 	import { buttonVariants } from '$lib/components/ui/button';
+	import Meta from '$lib/blocks/seo/meta.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -15,12 +16,14 @@
 	let isCollapsed = $state(false);
 
 	let selectedUser = $state(userData[0]);
-	interface ChatProps {
-		messages?: Message[];
-		selectedUser: UserData;
-		isMobile: boolean;
-	}
+	const Pageprops = {
+		title: 'Messenger • Examples',
+		description: 'Examples Chat Messenger',
+		type: 'Website'
+	};
 </script>
+
+<Meta {...Pageprops} />
 
 <div class="border-border mx-auto my-5 w-full border lg:max-w-5xl">
 	<div class="bg-background flex place-items-center justify-between border-b p-2">

@@ -32,7 +32,7 @@
 	}
 
 	const mainNav = docsConfig.mainNav.filter((item) => !item.external);
-	const sidebarNav = docsConfig.sidebarNav;
+	// const sidebarNav = docsConfig.sidebarNav;
 </script>
 
 <Button
@@ -66,7 +66,7 @@
 				</Command.Item>
 			{/each}
 		</Command.Group>
-		{#each sidebarNav as group}
+		<!-- {#each sidebarNav as group}
 			<Command.Group heading={group.title}>
 				{#each group.items as navItem}
 					<Command.Item
@@ -83,7 +83,7 @@
 					</Command.Item>
 				{/each}
 			</Command.Group>
-		{/each}
+		{/each} -->
 		<Command.Separator />
 		<Command.Group heading="Theme">
 			<Command.Item value="light" onSelect={() => runCommand(() => setMode('light'))}>

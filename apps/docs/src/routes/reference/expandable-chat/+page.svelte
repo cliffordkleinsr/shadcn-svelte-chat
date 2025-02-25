@@ -13,6 +13,7 @@
 	import type { PageData } from './$types';
 	import { Button } from '$lib/components/ui/button';
 	import { Send } from 'lucide-svelte';
+	import Meta from '$lib/blocks/seo/meta.svelte';
 
 	let chatMessages = $state([
 		{
@@ -24,7 +25,14 @@
 	let { data }: { data: PageData } = $props();
 
 	let message = $state('');
+	const Pageprops = {
+		title: 'Expandable Chat • Reference',
+		description: 'Expandable Chat API refrence',
+		type: 'Website'
+	};
 </script>
+
+<Meta {...Pageprops} />
 
 <div class="grid gap-2 px-5 py-3 lg:grid-cols-4 lg:px-20 lg:py-15">
 	<div class="col-span-3 grid gap-5">

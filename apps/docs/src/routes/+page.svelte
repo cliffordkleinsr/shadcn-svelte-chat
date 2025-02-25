@@ -1,8 +1,16 @@
 <script lang="ts">
+	import Meta from '$lib/blocks/seo/meta.svelte';
 	import { Separator } from '$lib/components/ui/separator';
 	import { ChevronRight } from 'lucide-svelte';
 	//   import { ScrollSpy, initTWE } from "tw-elements";
+	const Pageprops = {
+		title: 'Introduction',
+		description: 'What is shadcn svelte chat?',
+		type: 'Website'
+	};
 </script>
+
+<Meta {...Pageprops} />
 
 <div class="grid gap-1 px-5 py-3 lg:grid-cols-4 lg:px-25 lg:py-15">
 	<div

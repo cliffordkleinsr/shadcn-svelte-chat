@@ -1,6 +1,6 @@
 {
 	"name": "@shadcn-svelte-chat/cli",
-	"version": "1.2.0",
+	"version": "1.2.3",
 	"author": {
 		"name": "Clifford njoroge",
 		"url": "https://cliff-nu.vercel.app"

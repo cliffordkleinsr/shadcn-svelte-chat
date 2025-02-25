@@ -6,6 +6,7 @@
 	import Pnpm from '$lib/svgs/pnpm.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import type { PageData } from './$types';
+	import Meta from '$lib/blocks/seo/meta.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -24,8 +25,14 @@
 		code1 = 'bun x shadcn-svelte@next add button textarea avatar';
 		code2 = 'bun x @shadcn-svelte-chat/cli init';
 	}
+	const Pageprops = {
+		title: 'Getting Started',
+		description: 'Initializing shadcn chat components with shadcn svelte',
+		type: 'Website'
+	};
 </script>
 
+<Meta {...Pageprops} />
 <div class="m-5 grid gap-1 lg:grid-cols-4">
 	<div
 		data-twe-spy="scroll"
