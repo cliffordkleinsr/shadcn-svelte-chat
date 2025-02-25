@@ -1,32 +1,28 @@
-# Turborepo Svelte starter
+<h1 align="center">shadcn-svelte-chat</h1>
+<div align="center">
 
-This Turborepo starter is maintained by the Turborepo core team.
+[![NPM Version](https://img.shields.io/npm/v/@shadcn-svelte-chat/cli
+)](https://www.npmjs.com/package/@shadcn-svelte-chat/cli)
+[![NPM Downloads](https://img.shields.io/npm/dw/@shadcn-svelte-chat/cli)](https://www.npmjs.com/package/@shadcn-svelte-chat/cli)
+[![Demo Website](https://img.shields.io/website?url=https%3A%2F%2Fshadcn-svelte-chat.vercel.app%2F)](https://shadcn-svelte-chat.vercel.app/)
+[![GitHub Repo stars](https://img.shields.io/github/stars/cliffordkleinsr/shadcn-svelte-chat)](https://github.com/cliffordkleinsr/shadcn-svelte-chat)
 
-## Using this example
+</div>
+<p align="center">Package for adding customizable and re-usable chat components to your svelte applications. Build beautiful chat interfaces in minutes.</p> <p align="center">This project is inspired by <a href="https://github.com/jakobhoeg/shadcn-chat/">Shadcn Chat</a></p>
 
-Run the following command:
+# Installation
 
-```sh
-npx create-turbo@latest -e with-svelte
+
+> Some of the components rely on [shadcn-svelte](https://next.shadcn-svelte.com/), so make sure to have it installed.
+
+Init the project tree using :
+
+```bash
+npx @shadcn-svelte-chat/cli init
 ```
+# Contributing
 
-## What's inside?
+Contributions are more than welcome.
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [svelte-kit](https://kit.svelte.dev/) app
-- `web`: another [svelte-kit](https://kit.svelte.dev/) app
-- `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Vercel AI SDK chatbot example
+TBA.

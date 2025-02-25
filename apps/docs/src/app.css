@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import './tailwindcss-animate.css';
 
-@custom-variant dark (&:where(.dark, .dark *));
+@variant dark (&:where(.dark, .dark *));
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -11,15 +11,6 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
-@layer base {
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-		border-color: var(--color-gray-200, currentColor);
-	}
-}
 
 :root {
 	--background: 0 0% 100%;
@@ -82,7 +73,7 @@
 	--sidebar-ring: 217.2 91.2% 59.8%;
 }
 
-@theme inline {
+@theme {
 	/* Fonts */
 	--font-sans:
 		'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -165,6 +156,13 @@
 }
 
 @layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
 	* {
 		@apply border-border;
 	}

@@ -29,10 +29,9 @@ export const Users: User[] = [
 	},
 	{
 		id: 5,
-		avatar:
-			'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
+		avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
 		messages: [],
-		name: 'Jakob Hoeg'
+		name: 'Cliffordkleinsr'
 	}
 ];
 
@@ -52,9 +51,8 @@ export const userData: User[] = [
 			},
 			{
 				id: 2,
-				avatar:
-					'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-				name: 'Jakob Hoeg',
+				avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+				name: 'Cliffordkleinsr',
 				message: 'Hey!',
 				timestamp: '10:01 AM'
 			},
@@ -68,9 +66,8 @@ export const userData: User[] = [
 			},
 			{
 				id: 4,
-				avatar:
-					'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-				name: 'Jakob Hoeg',
+				avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+				name: 'Cliffordkleinsr',
 				message: 'I am good, you?',
 				timestamp: '10:03 AM'
 			},
@@ -84,9 +81,8 @@ export const userData: User[] = [
 			},
 			{
 				id: 6,
-				avatar:
-					'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-				name: 'Jakob Hoeg',
+				avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+				name: 'Cliffordkleinsr',
 				message: 'That is good to hear!',
 				timestamp: '10:05 AM',
 				isLiked: true
@@ -101,9 +97,8 @@ export const userData: User[] = [
 			},
 			{
 				id: 8,
-				avatar:
-					'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-				name: 'Jakob Hoeg',
+				avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+				name: 'Cliffordkleinsr',
 				message:
 					'It has been good. I went for a run this morning and then had a nice breakfast. How about you?',
 				timestamp: '10:10 AM'
@@ -152,9 +147,8 @@ export const ChatBotMessages: Message[] = [
 	},
 	{
 		id: 2,
-		avatar:
-			'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-		name: 'Jakob Hoeg',
+		avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+		name: 'Cliffordkleinsr',
 		message: 'I need help with my order',
 		timestamp: '10:01 AM',
 		role: 'user'
@@ -169,9 +163,8 @@ export const ChatBotMessages: Message[] = [
 	},
 	{
 		id: 4,
-		avatar:
-			'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-		name: 'Jakob Hoeg',
+		avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+		name: 'Cliffordkleinsr',
 		message: '123456',
 		timestamp: '10:03 AM',
 		role: 'user'
@@ -195,9 +188,8 @@ export const ChatBotMessages: Message[] = [
 	},
 	{
 		id: 7,
-		avatar:
-			'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-		name: 'Jakob Hoeg',
+		avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+		name: 'Cliffordkleinsr',
 		message: 'Thank you for your help!',
 		timestamp: '10:06 AM',
 		role: 'user'
@@ -217,9 +209,8 @@ export type UserData = (typeof userData)[number];
 
 export const loggedInUserData = {
 	id: 5,
-	avatar:
-		'https://avatars.githubusercontent.com/u/114422072?s=400&u=8a176a310ca29c1578a70b1c33bdeea42bf000b4&v=4',
-	name: 'Jakob Hoeg'
+	avatar: 'https://avatars.githubusercontent.com/u/37869706?v=4',
+	name: 'Cliffordkleinsr'
 };
 
 export type LoggedInUserData = typeof loggedInUserData;

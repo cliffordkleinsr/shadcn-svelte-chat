@@ -7,6 +7,8 @@
 	import { Button } from '$lib/components/ui/button';
 	import type { PageData } from './$types';
 	import Meta from '$lib/blocks/seo/meta.svelte';
+	import { ChevronRight } from 'lucide-svelte';
+	import { Separator } from '$lib/components/ui/separator';
 
 	let { data }: { data: PageData } = $props();
 
@@ -125,6 +127,13 @@
 		<section id="example" class="mt-10">
 			<h1 class="text-2xl font-bold">Example</h1>
 			<ChatExample />
+		</section>
+
+		<section class="my-10 w-full justify-end space-y-10 text-lg">
+			<a href="/reference/chat-bubble" class="float-end flex gap-1 transition hover:text-blue-500">
+				API Reference
+				<ChevronRight class="my-[2px]" />
+			</a>
 		</section>
 	</div>
 	<div class="hidden flex-col gap-2 px-10 py-5 md:block">

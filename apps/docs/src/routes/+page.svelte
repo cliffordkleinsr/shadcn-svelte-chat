@@ -55,9 +55,9 @@
 				</li>
 			</ul>
 		</section>
+		<Separator class="my-5" />
 
-		<section class="my-28 w-full space-y-10 text-lg">
-			<Separator />
+		<section class="my-10 w-full justify-end space-y-10 text-lg">
 			<a href="/get-started" class="float-end flex gap-1 transition hover:text-blue-500">
 				Get Started
 				<ChevronRight class="my-[2px]" />

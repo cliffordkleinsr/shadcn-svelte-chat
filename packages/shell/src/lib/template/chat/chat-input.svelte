@@ -5,11 +5,12 @@
 
 	type ChatInputProps = WithElementRef<HTMLTextareaAttributes>;
 
-	let { class: className, ref = $bindable(null), ...restProps }: ChatInputProps = $props();
+	let { class: className, value=$bindable(undefined), ref = $bindable(null), ...restProps }: ChatInputProps = $props();
 </script>
 
 <Textarea
 	autocomplete="off"
+	bind:value
 	{ref}
 	name="message"
 	class={[
