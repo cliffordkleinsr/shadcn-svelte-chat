@@ -94,7 +94,7 @@
 											href={item.url}
 											onclick={() => {
 												if (sidebar.isMobile) {
-													sidebar.toggle();
+													setTimeout(() => sidebar.toggle(), 300);
 												}
 											}}
 											{...props}
