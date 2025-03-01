@@ -2,9 +2,9 @@
   "name": "shadcn-chat-svelte",
   "devDependencies": {
     "motion-start": "^0.1.3",
-    "prettier": "^3.5.1",
+    "prettier": "^3.5.2",
     "prettier-plugin-svelte": "^3.3.3",
-    "turbo": "^2.4.2"
+    "turbo": "^2.4.4"
   },
   "engines": {
     "node": ">=18"
@@ -23,6 +23,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "docs": "workspace:*",
     "svelte-sonner": "^0.3.28"
   }
 }

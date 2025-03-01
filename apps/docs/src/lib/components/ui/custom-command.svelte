@@ -2,13 +2,15 @@
 	import { resetMode, setMode } from 'mode-watcher';
 	import { cn } from '$lib/utils.js';
 	import { goto } from '$app/navigation';
-	import Button from './button/button.svelte';
+	import { Button } from '$lib/components/ui/button';
+
 	import * as Command from '$lib/components/ui/command';
 	import Circle from 'lucide-svelte/icons/circle';
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
 	import { docsConfig } from '$lib/configs/docs';
 	import { File, Laptop } from 'lucide-svelte';
+	import Search from 'lucide-svelte/icons/search';
 
 	let open = $state(false);
 
@@ -37,11 +39,12 @@
 
 <Button
 	variant="outline"
-	class={['text-muted-foreground relative justify-start text-sm sm:pr-12']}
+	class={[' text-muted-foreground relative w-full justify-start text-sm sm:pr-12']}
 	onclick={() => (open = true)}
 >
 	<span class="hidden lg:inline-flex"> Search documentation... </span>
-	<span class="inline-flex lg:hidden">Search...</span>
+	<span class="inline-flex lg:hidden">Search the docs...</span>
+
 	<kbd
 		class="bg-muted pointer-events-none absolute top-1.5 right-1.5 hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex"
 	>

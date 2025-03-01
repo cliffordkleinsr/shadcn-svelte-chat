@@ -1,5 +1,7 @@
+@import '@fontsource/fira-sans';
 @import 'tailwindcss';
-@import './tailwindcss-animate.css';
+@plugin "tailwindcss-animate";
+/* @import './tailwindcss-animate.css'; */
 
 @variant dark (&:where(.dark, .dark *));
 
@@ -11,6 +13,16 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
+
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+}
 
 :root {
 	--background: 0 0% 100%;
@@ -81,6 +93,7 @@
 	--font-mono:
 		'Source Code Pro Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		'Liberation Mono', 'Courier New', monospace;
+	--font-fira: 'Fira Sans', sans-serif;
 
 	/* Colors */
 	--color-border: hsl(var(--border));
@@ -156,18 +169,11 @@
 }
 
 @layer base {
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-		border-color: var(--color-gray-200, currentColor);
-	}
 	* {
 		@apply border-border;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground font-fira;
 	}
 	code {
 		@apply rounded-md border border-black/10 bg-black/10 px-[.25em] py-0.5 text-[.9em] break-words dark:border-white/10 dark:bg-white/10;

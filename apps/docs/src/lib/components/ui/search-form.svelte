@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Label } from './label/index.js';
-	import * as Sidebar from './sidebar/index.js';
+	import { Label } from '$lib/components/ui/label';
+	import * as Sidebar from '$lib/components/ui/sidebar';
 	import type { WithElementRef } from 'bits-ui';
-	import Search from 'lucide-svelte/icons/search';
 	import type { HTMLFormAttributes } from 'svelte/elements';
 	import CustomCommand from './custom-command.svelte';
 
@@ -12,6 +11,7 @@
 <form bind:this={ref} {...restProps}>
 	<Sidebar.Group class="py-0">
 		<Sidebar.GroupContent class="relative">
+			<Label for="search" class="sr-only">Search</Label>
 			<CustomCommand />
 		</Sidebar.GroupContent>
 	</Sidebar.Group>
