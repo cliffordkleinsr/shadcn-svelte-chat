@@ -1,7 +1,7 @@
 @import '@fontsource/fira-sans';
 @import 'tailwindcss';
-@plugin "tailwindcss-animate";
-/* @import './tailwindcss-animate.css'; */
+/* @plugin "tailwindcss-animate"; */
+@import './tailwindcss-animate.css';
 
 @variant dark (&:where(.dark, .dark *));
 
