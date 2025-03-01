@@ -12,8 +12,13 @@
 
 <Meta {...Pageprops} />
 
-<div class="grid gap-1 px-5 py-3 lg:grid-cols-4 lg:px-25 lg:py-15" id="navMain">
-	<div class="relative col-span-3 grid gap-5 overflow-auto">
+<div class="grid gap-1 px-5 py-3 lg:grid-cols-4 lg:px-25 lg:py-15">
+	<div
+		data-twe-spy="scroll"
+		data-twe-target="#scrollspy-smooth"
+		data-twe-offset="0"
+		class="relative col-span-3 grid gap-5 overflow-auto"
+	>
 		<section id="introduction" class="flex flex-col gap-3">
 			<h1 class="text-3xl font-bold">Introduction</h1>
 			<Separator />
@@ -63,16 +68,19 @@
 	<div class="hidden flex-col gap-2 px-10 py-5 md:block">
 		On this page
 		<!-- Scrollspy -->
-		<div id=".nav-link" class="sticky-top ps-3 text-sm">
-			<ul>
+		<div id="scrollspy-smooth" class="sticky-top ps-3 text-sm">
+			<ul data-twe-nav-list-ref>
 				<li class="py-1">
 					<a
+						data-twe-nav-link-ref
+						data-twe-nav-link-active
 						class="bg-transparent px-[5px] text-[#4b5563] shadow-none transition-all dark:text-neutral-200"
 						href="#introduction">Introduction</a
 					>
 				</li>
 				<li class="py-1">
 					<a
+						data-twe-nav-link-ref
 						class="bg-transparent px-[5px] text-[#4b5563] shadow-none transition-all dark:text-neutral-200"
 						href="#features">Features</a
 					>
